@@ -272,6 +272,10 @@ func Init(customConf string) error {
 	// ----- Time settings -----
 	// *************************
 
+	if Time.FormatLayout == "" {
+		return fmt.Errorf("unrecognized '[time] FORMAT': %s", Time.Format)
+	}
+
 	if err = File.Section("time").MapTo(&Time); err != nil {
 		return errors.Wrap(err, "mapping [time] section")
 	}
